@@ -1,0 +1,42 @@
+<head>
+  <title>blaze-zombie-deps</title>
+</head>
+
+<body>
+
+<pre>
+
+> var x=0
+
+> Session.set("viewType","inner")
+Template.inner.helperDependentOnX
+
+> Session.set("viewType",null); Session.set("x",x++);
+(no output)
+
+> Session.set("viewType","inner")
+Template.inner.helperDependentOnX
+
+> Session.set("x",x++); Session.set("viewType",null);
+Template.inner.helperDependentOnX
+
+</pre>
+
+  {{> outer}}
+
+</body>
+
+<template name="outer">
+
+    {{> viewType }}
+
+</template>
+
+
+<template name="inner">
+
+    {{ helperDependentOnX }}
+
+</template>
+
+
